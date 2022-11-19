@@ -1,55 +1,16 @@
-import { getOf, setOf, Address, generateEvent } from "@massalabs/massa-as-sdk";
+import * as massa from "@massalabs/massa-as-sdk";
+import { balance, transferCoins } from "@massalabs/massa-as-sdk";
+import { mint, transfer } from "./NFT/nft";
 
-const balanceKey = "balance";
-const totalSupplyKey = "totalSupply";
-
-const ERC20 = new Address("A1UcnkarCtykM9T5PJ4tKKktyaFQu1GbPeE1QyxrB1T8qXA524n");
-
-// Mint an amount of token to an address
-export function mint(amount: u64, to: Address): void {
-    const rawBal = getOf(ERC20, balanceKey + to._value);
-    const rawTotalSupply = getOf(ERC20, totalSupplyKey);
-    let bal: u64 = 0;
-    let totalSupply: u64 = 0;
-
-    if (rawBal) {
-        bal = u64(parseInt(rawBal));
-    }
-    if (rawTotalSupply) {
-        totalSupply = u64(parseInt(rawTotalSupply));
-    }
-
-    bal += amount;
-    totalSupply += amount;
-
-    setOf(ERC20, totalSupplyKey, totalSupply.toString());
-    setOf(ERC20, balanceKey + to._value, bal.toString());
-
-    generateEvent(amount.toString() + " token minted on " + to._value);
+// CREATE an NFT(either through editing an already existing NFT's image or through uploading an image and start a tree)
+export function mintNFT(to: string): string {
+    const amount = 5;
+    const b = balance();
+    transferCoins(to, amount);
+    return mint(to);
 }
 
-// Burn an amount of token from an address
-export function burn(amount: u64, to: Address): void {
-    const rawBal = getOf(ERC20, balanceKey + to._value);
-    const rawTotalSupply = getOf(ERC20, totalSupplyKey);
-    let bal: u64 = 0;
-    let totalSupply: u64 = 0;
-
-    if (rawTotalSupply) {
-        totalSupply = u64(parseInt(rawTotalSupply));
-    }
-
-    if (rawBal) {
-        bal = u64(parseInt(rawBal));
-        bal -= amount;
-        totalSupply -= amount;
-
-        setOf(ERC20, totalSupplyKey, totalSupply.toString());
-        setOf(ERC20, balanceKey + to._value, bal.toString());
-
-        generateEvent(amount.toString() + " token burnt on " + to._value);
-    } else {
-        generateEvent("No token to burn on " + to._value + " address");
-    }
+// transfers an NFT to the to address
+export function transferNFT(to: string): string {
+    return transfer(to);
 }
-
