@@ -2,7 +2,7 @@
 Gatto Go Hack #3  Hackathon - Art &amp; Massa
 
 Galatea is a decentralized nft sharing place and factory, where everyone can collaborate on nft collections.
-
+![Galatea.massa](https://cdn.discordapp.com/attachments/1043240831479451701/1043849332220244048/simplescreenrecorder-2022-11-20_03.47.23.gif)
 # How to run
 
 ```
