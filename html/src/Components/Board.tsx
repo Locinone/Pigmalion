@@ -17,62 +17,87 @@ const baseAccount = {
     address: "A1qZL4iJYRDRo9EtDauJuWNj56FNXWhtKinv15GEakraBa91dEA",
   } as IAccount;
 
+const SecondAcount = {
+  publicKey:"S1Ab1erQecssV32UCjZimpwXCQu416gAbV21T7YPoSpEDZ5KMRM",
+  secretKey:"P1qSX3VNVUxsHhcY2c3wmTHeQUCnuYdbDHVorjfzZSQobHt2b3z",
+  address: "A1ZmU1SWWZXYFpoof4frZKG2tJSxMyvCEmg2fU2wU5JCyZzNzb",
+} as IAccount;
 
 type TNodeStatus = INodeStatus | null;
 
 const sc_addr = "A12egHo2xkg2s68WJzu8CofoZ9vwz2M3dYhcsxZ6PCqqXoJCST4q" // smart contract adress;
-  
+
   
 export interface IBoardProps {}
 
-function NodeInfo() {
-    const [nodeStatus, setNodeStatus] = useState<TNodeStatus>(null);
-  
-    const getNodeStatusAsync = async () => {
-      try {
-        let web3Client = await ClientFactory.createDefaultClient(
-          DefaultProviderUrls.TESTNET,
-          false,
-          baseAccount
-        );
-        const nodeStatus: INodeStatus = await web3Client
-          .publicApi()
-          .getNodeStatus();
-        setNodeStatus(nodeStatus);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-  
-    useEffect(() => {
-      getNodeStatusAsync();
-    }, []);
-  
-    const getNodeOverview = (nodeStatus?: TNodeStatus): JSX.Element => {
-      if (!nodeStatus) {
-        return <p>"Getting Massa's Node Status..."</p>;
-      }
-      return (
-        <ul>
-          <li>Massa Net Version: {nodeStatus?.version}</li>
-          <li>Massa Net Node Id: {nodeStatus?.node_id}</li>
-          <li>Massa Net Node Ip: {nodeStatus?.node_ip}</li>
-          <li>Massa Net Time: {nodeStatus?.current_time}</li>
-          <li>Massa Net Cycle: {nodeStatus?.current_cycle}</li>
-        </ul>
-      );
-    };
-  
-    return getNodeOverview(nodeStatus);
-  }
+// this.providers = [
+//   {
+//       url: 'https://test.massa.net/api/v2',
+//       type: ProviderType.PUBLIC,
+//   } as IProvider,
+//   {
+//       url: process.env.JSON_RPC_URL + ':33038',
+//       type: ProviderType.PRIVATE,
+//   } as IProvider,
+// ];
 
-function Square(props: any) {
-    return (
-      <button className="square" onClick={props.onClick} id={`square_${props.squareIndex}`}>
-        {props.value}
-      </button>
-    );
-  }
+// this.web3ClientConfig = {
+//   providers: this.providers,
+//   retryStrategyOn: true,
+//   periodOffset: 1,
+// };
+
+// this.web3Client = new Client(this.web3ClientConfig, this.baseAccount);
+
+// this.contractAddress = process.env.DEFAULT_WALLET_ADDRESS;
+// function NodeInfo() {
+//     const [nodeStatus, setNodeStatus] = useState<TNodeStatus>(null);
+  
+//     const getNodeStatusAsync = async () => {
+//       try {
+//         let web3Client = await ClientFactory.createDefaultClient(
+//           DefaultProviderUrls.TESTNET,
+//           false,
+//           baseAccount
+//         );
+//         const nodeStatus: INodeStatus = await web3Client
+//           .publicApi()
+//           .getNodeStatus();
+//         setNodeStatus(nodeStatus);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+  
+//     useEffect(() => {
+//       getNodeStatusAsync();
+//     }, []);
+  
+//     const getNodeOverview = (nodeStatus?: TNodeStatus): JSX.Element => {
+//       if (!nodeStatus) {
+//         return <p>"Getting Massa's Node Status..."</p>;
+//       }
+//       return (
+//         <ul>
+//           <li>Massa Net Version: {nodeStatus?.version}</li>
+//           <li>Massa Net Node Id: {nodeStatus?.node_id}</li>
+//           <li>Massa Net Node Ip: {nodeStatus?.node_ip}</li>
+//           <li>Massa Net Time: {nodeStatus?.current_time}</li>
+//           <li>Massa Net Cycle: {nodeStatus?.current_cycle}</li>
+//         </ul>
+//       );
+//     };
+  
+//     return getNodeOverview(nodeStatus);
+//   }
+
+// function Square(props: any) {
+//     return (
+//       <button className="square" onClick={props.onClick} id={`square_${props.squareIndex}`}>
+//         {props.value}
+//       </button>
+//     );
+//   }
 
 function BoardGame() {
     let [squares, setSquares] = React.useState(Array(9).fill(null));
@@ -113,7 +138,7 @@ function BoardGame() {
     }
 
     function handleClick(i: number) {
-        var call_params = new Args();
+        var call_params = new Args(); 
         call_params.addU32(BigInt(i));
         ClientFactory.createDefaultClient(
         DefaultProviderUrls.TESTNET,

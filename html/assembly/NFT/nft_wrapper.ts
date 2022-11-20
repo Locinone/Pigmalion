@@ -1,5 +1,5 @@
-import {Address, call, Args} from '../std';
-import {NoArg} from '../std/arguments';
+import {Address, call, Args} from "@massalabs/massa-as-sdk/assembly/std";
+import {NoArg} from "@massalabs/massa-as-sdk/assembly/std/arguments";
 
 /**
  * The Massa's standard NFT implementation wrapper.
@@ -109,7 +109,7 @@ export class NFTWrapper {
    * Check first the caller owns the token.
    * @param {Address} to
    * @param {u64} tokenId
-   * @return {void}
+   * @return {string}
    */
   transfer(_args: string): string {
     return call(this._origin, 'transfer', new Args(_args), 0);

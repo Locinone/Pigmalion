@@ -6,7 +6,8 @@
 ////////////////////////////
 ///////////////////////////////
 
-import {Storage, Context, generateEvent, Args} from '../std/index';
+import {Storage, Context, generateEvent, Args} from '@massalabs/massa-as-sdk/assembly/std/index';
+
 const ownerTokenKey: string = 'ownerOf_';
 const counterKey: string = 'Counter';
 const ownerKey: string = 'Owner';
