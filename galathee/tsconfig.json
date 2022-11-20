@@ -9,7 +9,7 @@
         "target": "es2022",
         "types": ["node"]
     },
-    "include": ["./*.ts"],
+    "include": ["./assembly/"],
     "exclude": ["node_modules"],
     "experimentalDecorators": true,
     "ts-node": {
