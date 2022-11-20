@@ -91,13 +91,13 @@ export interface IBoardProps {}
 //     return getNodeOverview(nodeStatus);
 //   }
 
-// function Square(props: any) {
-//     return (
-//       <button className="square" onClick={props.onClick} id={`square_${props.squareIndex}`}>
-//         {props.value}
-//       </button>
-//     );
-//   }
+function Square(props: any) {
+    return (
+      <button className="square" onClick={props.onClick} id={`square_${props.squareIndex}`}>
+        {props.value}
+      </button>
+    );
+  }
 
 function BoardGame() {
     let [squares, setSquares] = React.useState(Array(9).fill(null));
